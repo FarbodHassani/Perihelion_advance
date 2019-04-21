@@ -44,9 +44,8 @@ c
 
       !print *,f(a),f(b),'zero'
       if(f(a)*f(b)>0)then
-!   print *,a,b,'no sign change'
-         zeroin=0
-         return 
+      !   print *,a,b,'no sign change'
+         stop
       endif
 c
 c begin step

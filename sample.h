@@ -9,8 +9,10 @@ parameter(dx=0.001q0) !grid size
 real*16 period
 parameter(period=7.59974) !Mercury period in megasecond = 87.96days
 real*16 Norbit
-parameter(Norbit=3.2) !Number of perihelion we are interested
+parameter(Norbit=0.2) !Number of perihelion we are interested
 real*16 tolerance
-parameter(tolerance=8.0q-11) !Tolerance
+parameter(tolerance=1.0q-11) !Tolerance
+real*16 theta
+parameter(theta= 0*3.1415926535897932384626433832795028841971693993751/9)
 real*16 eccentricity
-parameter(eccentricity=0.4) !For 0 we recover the mercury and sun orbit eccentricity
+parameter(eccentricity=0.55) !For 0 we recover the mercury and sun orbit eccentricity
