@@ -1,0 +1,18 @@
+\BOOKMARK [1][-]{section.1}{ Newtonian gravity}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Strong/weak regime way I}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{Strong/weak regime way II}{section.1}% 3
+\BOOKMARK [2][-]{subsection.1.3}{code:}{section.1}% 4
+\BOOKMARK [2][-]{subsection.1.4}{x-y plane}{section.1}% 5
+\BOOKMARK [1][-]{section.2}{Newtonian gravity on the lattice}{}% 6
+\BOOKMARK [2][-]{subsection.2.1}{2 dimensional case, linear interpolation}{section.2}% 7
+\BOOKMARK [2][-]{subsection.2.2}{2 dimensional case, computing force}{section.2}% 8
+\BOOKMARK [2][-]{subsection.2.3}{2D calculation-Mistakes}{section.2}% 9
+\BOOKMARK [1][-]{section.3}{2D correct calculation}{}% 10
+\BOOKMARK [2][-]{subsection.3.1}{3 dimensional}{section.3}% 11
+\BOOKMARK [2][-]{subsection.3.2}{Results}{section.3}% 12
+\BOOKMARK [1][-]{section.4}{General relativity}{}% 13
+\BOOKMARK [2][-]{subsection.4.1}{Einstein's equations}{section.4}% 14
+\BOOKMARK [2][-]{subsection.4.2}{The geodesic equations, First order}{section.4}% 15
+\BOOKMARK [2][-]{subsection.4.3}{ Schwarzschild metric}{section.4}% 16
+\BOOKMARK [2][-]{subsection.4.4}{Geodesic equations-Beyond first order approximation}{section.4}% 17
+\BOOKMARK [1][-]{section.5}{First order geodesic equations and different potentials results}{}% 18
