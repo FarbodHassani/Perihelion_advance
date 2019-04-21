@@ -16,30 +16,12 @@
   real*16 atol(ndgl),rtol(ndgl)
   real*16 tol
   real*16 x,xend,xbeg
-  real*16 theta,pi
-  common theta
+
   !     vf is vector field
-  integer iangle
 
   external vf,solout
   real*16 h
   integer*4 i,iout,itol,idid
-    !FILE OPEN
-  ! * * * * * * * * * * * * * * * * * * * * * * * * *
-  open (unit = 14, file = "schw_perihelion.001_ecce_04.dat")
-
-
-  !open (unit = 12, file = "schw_txy.dat")
-
-  !open (unit = 16, file = "Energy.dat")
-
-
-
-
-
-  do iangle = 0,90,1
-     theta=3.1415926535897932384626433832795028841971693993751/180.0*iangle
-
   ! could use parameters in function
 
   !adapt the parameters lrcont and licont in the subprograms, where they must
@@ -54,7 +36,7 @@
   iout=2
   ! --- endpoint of integration
   xbeg=0q0
-  xend= period * Norbit * beta **(3./2.) !the rescaling for
+  xend= period * Norbit * beta **(3./2.) * 1./((1. - eccentricity) * (1. - eccentricity)* (1. - eccentricity)) !the rescaling for
   ! --- initial values
   x=xbeg
 
@@ -65,6 +47,11 @@
   do i=1,n
      y(i)=0.0q0
   end do
+  !FILE OPEN
+  ! * * * * * * * * * * * * * * * * * * * * * * * * *
+  open (unit = 12, file = "schw_txy.dat")
+  open (unit = 14, file = "schw_perihelion.dat")
+  !open (unit = 16, file = "Energy.dat")
 
 
   ! * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -92,10 +79,6 @@
   !Rotated IC
 
 
-  !y(1) = COS(theta)* 46.001272 * beta!(Giga meter)
-  !y(2)=  SIN(theta)* 46.001272 * beta
-  !y(3)= -SIN(theta)* 58.98q0 / SQRT(beta)  !(x'=0)
-  !y(4)=  COS(theta)* 58.98q0 / SQRT(beta) !(y'= vmax = 58.98 for mercury;//(*(Giga meter)/(Mega !second)*)(*vmax=vmax(1/10^9)(*(Gm/m)*)(10^5/1)*)(*(s/d)*)(*Gm/d*))
   y(1) = COS(theta)* 46.001272 * beta * (1. - eccentricity)!(Giga meter)
   y(2)=  SIN(theta)* 46.001272 * beta * (1. - eccentricity)
   y(3)= -(SIN(theta)* 58.98q0 / SQRT(beta) ) * SQRT((1. + eccentricity)/(1. - eccentricity))   !(x'=0)
@@ -132,7 +115,7 @@
           &                  solout,iout,                                    &
           &                  work,lwork,iwork,liwork,lrcont,licont,idid)
 
-     enddo
+
    end program
 
    !
@@ -182,8 +165,6 @@
      include 'sample.h'
      integer*4 nr,n,irtrn
      real*16 y(n)
-     real*16  theta
-     common theta
 !!!!!! jpadded
      real*16 oldderivative
      external derivative
@@ -226,12 +207,12 @@
      do i=lasti+1,currenti
         x1=contex(1,i*dt)
         y1=contex(2,i*dt)
- !       write(12,'(4e17.8)')x1,y1,theta,i*dt
+        write(12,'(4e17.8)')x1,y1,theta,i*dt
         lasti=i
      enddo
      !         print *,distance(xold),distance(x),contex(1,x),increasing,'dist'
 
-
+     do i=1,1
 
 
         if(increasing==0 .and.(COS(theta)*contex(1,x)+SIN(theta)*contex(2,x))>0.and.&
@@ -245,10 +226,10 @@
            angle=ATAN(contex(2,zerotime)/contex(1,zerotime))
            !        print *,angle
            !print *,mod(angle,theta)
-           write(14,'(2e25.16,i4,2e17.8)')(mod(angle,twopi)-theta),zerotime,int(theta/3.14155926*180),zerotime/period,dx
+           write(14,'(3e17.8)')(mod(angle,twopi)-theta),i*dt,theta
         endif
 
-
+     enddo
      if( distance(xold)<distance(x))increasing=1
      if( distance(xold)>distance(x))increasing=0
      lasti=currenti
